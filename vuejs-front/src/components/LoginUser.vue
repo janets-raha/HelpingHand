@@ -20,7 +20,8 @@ export default {
   data() {
     return {
         email: "",
-        password: ""
+        password: "",
+        device_name: "browser"
     };
   },
 
@@ -35,7 +36,8 @@ export default {
 
       var raw = JSON.stringify({
         email: this.email,
-        password: this.password
+        password: this.password,
+        device_name:this.device_name
       });
 
       var requestOptions = {
@@ -47,10 +49,8 @@ export default {
 
       fetch("http://localhost:8000/api/login", requestOptions)
         .then(response => {
-          if(response.status !== 200) {
-            this.$router.push({ name: "Show"})
-            console.log("mon kiki")
-          }
+          localStorage.setItem("token", response.data);
+          this.$router.push({name: "Profile"})
         })
         .then(json => console.log(json))
         //.then(result => (this.validation = result["message"]))

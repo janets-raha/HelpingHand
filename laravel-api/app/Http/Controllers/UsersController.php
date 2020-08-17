@@ -49,32 +49,21 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'device_name' => 'required',
         ]);
     
         $user = User::where('email', $request->email)->first();
     
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response([
-                'message' => ['These credentials do not match our records.']
-            ], 404);
-        } else {
-            return response([
-                'message' => ['registration successful']
-            ], 200);
-            
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
         }
     
-        $token = $user->createToken('my-app-token')->plainTextToken;
-    
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-    
-        return response($response, 201);
+        return $user->createToken($request->device_name)->plainTextToken;
     }
 
     /**
@@ -85,7 +74,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return User::find($id);
+       // return User::find($id);
     }
 
     /**

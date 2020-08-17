@@ -46,6 +46,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "registern" */ "../views/RegisterN.vue")
   },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () =>
+      import(/* webpackChunkName: "profile" */ "../views/Profile.vue")
+  },
 
     //routes missions only
 
