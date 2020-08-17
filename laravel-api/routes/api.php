@@ -22,3 +22,11 @@ Route::apiResource('/user', 'UsersController');
 Route::apiResource('/ngo', 'NgosController');
 Route::apiResource('/mission', 'MissionsController');
 Route::apiResource('/application', 'ApplicationsController');
+
+// routes users only
+Route::post('/login', 'UsersController@login');
+Route::post('/register', 'UsersController@create');
+
+// routes ngos only
+Route::post('/login-ngo', 'NgosController@login');
+Route::post('/register-ngo', 'NgosController@create');

@@ -18,7 +18,37 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Login.vue")
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: () =>
+      import(/* webpackChunkName: "register" */ "../views/Register.vue")
+  },
+
+//routes ngos only
+
+  {
+    path: "/login-ngo",
+    name: "LoginN",
+    component: () =>
+      import(/* webpackChunkName: "loginn" */ "../views/LoginN.vue")
+  },
+  {
+    path: "/register-ngo",
+    name: "RegisterN",
+    component: () =>
+      import(/* webpackChunkName: "registern" */ "../views/RegisterN.vue")
+  },
+
+    //routes missions only
+
 ];
 
 const router = new VueRouter({
